@@ -1,8 +1,9 @@
 import pandas as pd
 
 df = pd.read_csv('adult.data.csv')
-total_people = len(df)
-percentage_bachelors = df[df['education'] == "Bachelors"]
-count_percentage_bachelors = len(percentage_bachelors)
-percent = (count_percentage_bachelors / total_people) * 100
-print(percent)
+min_work_hours = df['hours-per-week'].min()
+num_min_workers = df[df['hours-per-week'] == min_work_hours]
+min_workers = len(num_min_workers)
+rich = (df[(df['hours-per-week'] == min_work_hours) & (df['salary'] == '>50K')])
+rich_percentage = round((len(rich) / min_workers) * 100, 1)
+print(rich_percentage)
